@@ -1,0 +1,6 @@
+﻿<PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
+  <!-- Windows specific commands -->
+  <NuGetToolsPath>$([System.IO.Path]::Combine($(SolutionDir), ".nuget"))</NuGetToolsPath>
+  <PackagesConfig>$([System.IO.Path]::Combine($(ProjectDir), "packages.config"))</PackagesConfig>
+  <PackagesDir>$([System.IO.Path]::GetFullPath("$(SolutionDir)\..\Packages"))</PackagesDir>
+</PropertyGroup>

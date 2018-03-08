@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{544872EA-C6AA-48CD-99DB-D7353624CB86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{B38B0115-6391-4C53-9BF1-E00C44514063}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6EFD11B2-C039-4070-B663-ADFCF3DB3541}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\Nuget.Config = .nuget\Nuget.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\Nuget.Targets = .nuget\Nuget.Targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C9E7B5C3-8DB3-416E-8C6E-780871FDC05A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMagic.RestService", "Main\RestMagic.RestService\RestMagic.RestService.csproj", "{6C65E132-1A9C-4E41-B038-1ED275383A97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMagic.UnitTests", "Test\RestMagic.UnitTests\RestMagic.UnitTests.csproj", "{3CDC97A3-E6B6-446A-95EF-63EF09726E21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMagic.Lib", "Main\RestMagic.Data\RestMagic.Lib.csproj", "{6E2F4BC9-7360-42DB-B671-C90DBDC93A7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMagic.SDK", "Tools\RestMagic.SDK\RestMagic.SDK.csproj", "{80C1D58B-7132-4D68-B22B-5D2F8B9D2810}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C65E132-1A9C-4E41-B038-1ED275383A97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C65E132-1A9C-4E41-B038-1ED275383A97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C65E132-1A9C-4E41-B038-1ED275383A97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C65E132-1A9C-4E41-B038-1ED275383A97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDC97A3-E6B6-446A-95EF-63EF09726E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CDC97A3-E6B6-446A-95EF-63EF09726E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CDC97A3-E6B6-446A-95EF-63EF09726E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CDC97A3-E6B6-446A-95EF-63EF09726E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2F4BC9-7360-42DB-B671-C90DBDC93A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2F4BC9-7360-42DB-B671-C90DBDC93A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2F4BC9-7360-42DB-B671-C90DBDC93A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2F4BC9-7360-42DB-B671-C90DBDC93A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C1D58B-7132-4D68-B22B-5D2F8B9D2810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C1D58B-7132-4D68-B22B-5D2F8B9D2810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C1D58B-7132-4D68-B22B-5D2F8B9D2810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C1D58B-7132-4D68-B22B-5D2F8B9D2810}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C65E132-1A9C-4E41-B038-1ED275383A97} = {B38B0115-6391-4C53-9BF1-E00C44514063}
+		{3CDC97A3-E6B6-446A-95EF-63EF09726E21} = {544872EA-C6AA-48CD-99DB-D7353624CB86}
+		{6E2F4BC9-7360-42DB-B671-C90DBDC93A7C} = {B38B0115-6391-4C53-9BF1-E00C44514063}
+		{80C1D58B-7132-4D68-B22B-5D2F8B9D2810} = {C9E7B5C3-8DB3-416E-8C6E-780871FDC05A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45;.nuget\$\Packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45;.nuget\$\Packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;Packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;Packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
+		SolutionGuid = {314EA7F4-774B-4D3A-A46E-78C8BEE1E27F}
+	EndGlobalSection
+EndGlobal
