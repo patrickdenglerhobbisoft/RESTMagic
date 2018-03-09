@@ -226,10 +226,7 @@ namespace RestMagic.Lib.Data
             }
         }
     }
-    public class ExcludeAsSqlParam : Attribute
-    {
-
-    }
+  
     public class FieldName : Attribute
     {
         private readonly string _field;

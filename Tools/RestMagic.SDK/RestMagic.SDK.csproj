@@ -40,6 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Main\RestMagic.Data\CustomAttributes.cs">
+      <Link>CustomAttributes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Main\RestMagic.Data\Data\QueryModel.cs">
+      <Link>QueryModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Main\RestMagic.RestService\Models\Base\*.cs">
+      <Link>Models\%(FileName)</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -124,6 +124,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomAttributes.cs" />
     <Compile Include="Data\DataModel.cs" />
     <Compile Include="Data\DataUtilities.cs" />
     <Compile Include="Data\QueryModel.cs" />

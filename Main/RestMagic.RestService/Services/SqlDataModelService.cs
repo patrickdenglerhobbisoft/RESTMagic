@@ -5,8 +5,9 @@ using RestMagic.RestService.Models;
 using System.Data.SqlClient;
 using RestMagic.Lib.Data;
 using System.Reflection;
-using RestMagic.Data.Language;
+
 using RestMagic.Lib;
+using RestMagic.Lib.Language;
 
 namespace RestMagic.RestService.Services
 {

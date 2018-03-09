@@ -2,6 +2,7 @@
 #if !SDK
 using RestMagic.Lib.Data;
 #endif
+using RestMagic.Lib; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace RestMagic.RestService.Models
         : DataModel
 #endif
     {
-        [PrimaryKey]
+         
         public long Id { get; set; }
 
         public string TextData1 { get; set; }
