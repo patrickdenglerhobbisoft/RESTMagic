@@ -9,19 +9,26 @@ using RestMagic.RestService.Models;
 using RestMagic.Platform.UnitTests.Helpers;
 using static RestMagic.Platform.UnitTests.Helpers.UnitTestHelpers;
 using System.Linq;
+using System.Reflection;
 
 namespace RestMagic.Lib.Data.UnitTest
 {
     [TestClass]
     public class SqlTests
     {
-        
-        [TestInitialize]
-        public void Init()
+
+        [AssemblyInitialize()]
+        public static void MyTestInitialize(TestContext testContext)
         {
+            string assemblyLocation = Assembly.GetExecutingAssembly().Location;
+            // C:\Users\patri\source\repos\RestMagic\Test\RestMagic.UnitTests\bin\Debug\RestMagic.UnitTests.dll
+            string restMagicServiceDirectory = assemblyLocation.Replace(@"Test\RestMagic.UnitTests\bin\Debug\RestMagic.UnitTests.dll", @"Main\RestMagic.RestService");
+            var databaseDirectory = restMagicServiceDirectory + @"\App_Data";
+           
+            AppDomain.CurrentDomain.SetData("DataDirectory", databaseDirectory);
             DataFactory.PrimaryConnectionString = ConfigurationManager.ConnectionStrings["Sample"].ConnectionString;
         }
-
+        
 
         [TestMethod]
         public void TestGetOne()

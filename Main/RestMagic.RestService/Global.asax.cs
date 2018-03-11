@@ -15,9 +15,9 @@ namespace RestMagic.RestService
             GlobalConfiguration.Configuration.Formatters.Clear();
             GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
             GlobalConfiguration.Configure(WebApiConfig.Register);
-             
-         
-             
+            
+
+
         }
 
         
