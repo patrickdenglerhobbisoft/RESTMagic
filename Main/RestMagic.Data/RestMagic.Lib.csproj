@@ -126,10 +126,11 @@
   <ItemGroup>
     <Compile Include="CustomAttributes.cs" />
     <Compile Include="Data\DataModel.cs" />
+    <Compile Include="Data\DataModelComposite.cs" />
     <Compile Include="Data\DataUtilities.cs" />
     <Compile Include="Data\QueryModel.cs" />
     <Compile Include="Data\DataFactory.cs" />
-    <Compile Include="Language\Reflection.cs" />
+    <Compile Include="Language\ReflectionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestMagicExcpetion.cs" />
   </ItemGroup>

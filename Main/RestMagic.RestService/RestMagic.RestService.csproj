@@ -512,7 +512,11 @@
     </Compile>
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Models\Base\MyNewObject.cs" />
+    <Compile Include="Models\Base\MyNewObjectDetails.cs" />
     <Compile Include="Models\Base\SampleDataModel.cs" />
+    <Compile Include="Models\MyNewObject.cs" />
+    <Compile Include="Models\MyNewObjectDetails.cs" />
     <Compile Include="Models\SampleDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SqlDataModelService.cs" />

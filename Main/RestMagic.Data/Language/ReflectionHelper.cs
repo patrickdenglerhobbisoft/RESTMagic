@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace RestMagic.Lib.Language
 {
     
-    public static class Reflection
+    public static class ReflectionHelper
     {
         public const string SDK_ASSEMBLY_NAMESPACE = "RestMagic.SDK";
         public const string RESTSERVICE_ASSEMBLY_NAMESPACE = "RestMagic.RestService";
@@ -20,7 +20,7 @@ namespace RestMagic.Lib.Language
         {
             MethodInfo result = type
              .GetMethods()
-             .Single(m => m.Name == "GetList" && m.IsGenericMethodDefinition);
+             .Single(m => m.Name == "Get" && m.IsGenericMethodDefinition);
 
             if (result == null)
             {
@@ -49,5 +49,13 @@ namespace RestMagic.Lib.Language
 
            
         }
+        public static DataModel GetObjectTypeInstance(QueryModel queryModel)
+        {
+            string dataModelTypeName = RESTSERVICE_MODEL_NAMESPACE + "." + queryModel.DataModel;
+
+            return (DataModel)Activator.CreateInstance(RESTSERVICE_ASSEMBLY_NAMESPACE, dataModelTypeName).Unwrap();
+        }
+
+
     }
 }

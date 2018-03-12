@@ -25,17 +25,18 @@ namespace RestMagic.Platform.UnitTests.Helpers
             // Get Provider by Key
             dataIntegrationTests.Add("SampleByInt", new DomainControllerTestData()
             {
-                DataModelName = "SampleDataModel",
+              
                 // TODO: Once we refactor DataModel classes, we can share them with consumers if 
                 //       that is helpful.
 
                 ExpectedDataModel = new List<DataModel>()
                 {
-                    new SampleDataModel()
+                    new MyNewObject()
                     { }
                 },
                 QueryModel = new QueryModel()
                 {
+                    DataModel  = "SampleDataModel",
                     Parameters = new Dictionary<string, object>()
                     {
                         {  "Id","000000001" }
@@ -49,7 +50,7 @@ namespace RestMagic.Platform.UnitTests.Helpers
 
     public class DomainControllerTestData
     {
-        public string DataModelName { get; set; }
+        
         public QueryModel QueryModel;
         public List<DataModel> ExpectedDataModel { get; set; }
 

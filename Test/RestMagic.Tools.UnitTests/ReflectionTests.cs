@@ -13,8 +13,8 @@ namespace RestMagic.UnitTests
         [TestMethod]
         public void GetModelsFromAssemblyName()
         {
-            Type result = Reflection.GetDataModelTypesFromAssemblyName(Reflection.SDK_ASSEMBLY_NAMESPACE).First<Type>();
-            Assert.IsTrue(result == typeof(SampleDataModel));
+            Type result = ReflectionHelper.GetDataModelTypesFromAssemblyName(ReflectionHelper.SDK_ASSEMBLY_NAMESPACE).First<Type>();
+            Assert.IsTrue(result == typeof(MyNewObject));
         }
     }
 }

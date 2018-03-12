@@ -8,6 +8,7 @@ using System.Diagnostics;
  
 using RestMagic.Platform.UnitTests.Helpers;
 using System.Linq;
+using RestMagic.Lib.Data;
 
 namespace RestMagic.Platform.UnitTests
 {
@@ -28,19 +29,23 @@ namespace RestMagic.Platform.UnitTests
                     Debug.WriteLine("Testing Scenario " + testScenario.Key);
 
                     object result = new object();  // clearing in case types are floating around in memory
-                    var modelName = testScenario.Value.DataModelName;
+                    var modelName = testScenario.Value.QueryModel.DataModel;
                     string classString = "RestMagic.RestService.Models." + modelName;
-                    Type type = Type.GetType(classString);
+                 
 
-                    var request = new RestRequest(modelName, Method.POST);
+                    var request = new RestRequest(Method.POST);
                     request.RequestFormat = DataFormat.Json;
                     request.AddJsonBody(testScenario.Value.QueryModel);
 
-                    var queryResult = client.Execute< List<SampleDataModel>>(request);
-                   
-                    // var dataObject = Activator.CreateInstance(null, classString).Unwrap();
-                    // result = (dataObject as DataModel).GetList(parameters, type);
-                    //var objectTypeInstance = Activator.CreateInstance<T>();
+
+                    //Type type = Type.GetType(classString);
+                    //var listType = typeof(List<>);
+                    //Type constructedListType = listType.MakeGenericType(type);
+                    //dynamic instance = Activator.CreateInstance(constructedListType);
+
+                    dynamic instance =   client.Execute (request);
+
+                     
                 }
             }
             catch (Exception ex)

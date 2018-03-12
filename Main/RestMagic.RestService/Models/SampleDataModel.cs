@@ -27,10 +27,9 @@ namespace RestMagic.RestService.Models
         }
 
          
-        public static List<SampleDataModel> GetList(QueryModel queryModel)
+        public  List<SampleDataModel> Get(QueryModel queryModel)
         {
-            SampleDataModel sampleDataModel = new SampleDataModel();
-            return sampleDataModel.GetList<SampleDataModel>(queryModel);
+            return this.Get<SampleDataModel>(queryModel);
         }
 
      

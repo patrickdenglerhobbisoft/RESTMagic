@@ -33,7 +33,7 @@ namespace RestMagic.Lib.Data.UnitTest
         [TestMethod]
         public void TestGetOne()
         {
-            var sampleDataModel = SampleDataModel.GetList(new QueryModel()
+            var sampleDataModel = new SampleDataModel().Get(new QueryModel()
             {
                 Parameters = new Dictionary<string, object>()
                 {
@@ -56,8 +56,8 @@ namespace RestMagic.Lib.Data.UnitTest
         [TestMethod]
         public void AddGetUpdateInsert()
         {
-            // TODO: Should factor these but too much work until we care about upsert and fix key assigment
-            SampleDataModel sampleDataModel2;
+          
+            //SampleDataModel sampleDataModel2;
             SampleDataModel sampleDataModel3;
             SampleDataModel sampleDataModel = new SampleDataModel()
             {
@@ -94,7 +94,7 @@ namespace RestMagic.Lib.Data.UnitTest
 
 
             // use int
-            sampleDataModel3 = SampleDataModel.GetList(new QueryModel()
+            sampleDataModel3 = new SampleDataModel().Get(new QueryModel()
             {
                 Parameters = new Dictionary<string, object>()
                 {
@@ -180,7 +180,7 @@ namespace RestMagic.Lib.Data.UnitTest
                     }
                     Debug.WriteLine("Testing scenario " + sortingTestList.Key);
                     var testingData = sortingTestList.Value as BasicSortingPagingTestData;
-                    results = SampleDataModel.GetList(testingData.QueryToUse);
+                    results = new SampleDataModel().Get(testingData.QueryToUse);
                     foreach (SampleDataModel resultData in results)
                     {
                         // TODO: Fix ObjectEquals operator override

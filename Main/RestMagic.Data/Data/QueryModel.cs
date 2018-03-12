@@ -17,5 +17,10 @@ namespace RestMagic.Lib.Data
         public string SortField { get; set; }
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
+
+        internal static Dictionary<string, object> ByModel(QueryModel[] queryModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -18,20 +18,20 @@ namespace RestMagic.RestService.Services
         {
             DataFactory.PrimaryConnectionString = connectionString;
         }
-        public object GetData(string primaryModelName, QueryModel queryModel)
+        public object GetData( QueryModel queryModel)
         {
             object result = null;
-            string classString = "RestMagic.RestService.Models." + primaryModelName;
+            string classString = "RestMagic.RestService.Models." + queryModel.DataModel;
             var dataObject = Activator.CreateInstance(null, classString).Unwrap();
             Type type = Type.GetType(classString);
-            MethodInfo methodInfo = Reflection.GetMethodForGetListGeneric(type);
+            MethodInfo methodInfo = ReflectionHelper.GetMethodForGetListGeneric(type);
             try
             {
                 result = methodInfo.Invoke(dataObject, new object[] { queryModel });
             }
             catch   (Exception ex)
             {
-                throw new RestMagicExcpetion("Unable to invoke method on " + primaryModelName,ex.InnerException);
+                throw new RestMagicExcpetion("Unable to invoke method on " + queryModel.DataModel,ex.InnerException);
             }
             return result;
         }
@@ -41,7 +41,7 @@ namespace RestMagic.RestService.Services
     }
     public interface IDataModelService
     {
-        object GetData(string primaryModelName, QueryModel queryModel);
+        object GetData( QueryModel queryModel);
         
 
     }

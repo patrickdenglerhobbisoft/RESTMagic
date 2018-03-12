@@ -26,10 +26,10 @@ namespace RestMagic.RestService.Controllers
         }
 
 
-        [Route("DataModel/{PrimaryModelName}")]
+        [Route("{PrimaryModelName}")]
         [HttpPost]
       
-        public object FindDataByModel(string PrimaryModelName, [FromBody] QueryModel queryModel)
+        public object FindDataByModel( [FromBody] QueryModel queryModel)
         {
             object result = string.Empty;
             try
@@ -38,7 +38,7 @@ namespace RestMagic.RestService.Controllers
                 {
                     throw new RestMagicExcpetion("Call to FindDataByModel contained no parameters.");
                 }
-                result = DataModelService.GetData(PrimaryModelName, queryModel);
+                result = DataModelService.GetData( queryModel);
                 
             }
             catch (Exception e)
