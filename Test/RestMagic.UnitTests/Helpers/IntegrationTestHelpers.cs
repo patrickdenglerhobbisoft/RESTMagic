@@ -6,26 +6,26 @@ namespace RestMagic.Platform.UnitTests.Helpers
 {
     class IntegrationTestHelpers
     {
-        private static Dictionary<string, DomainControllerTestData> restIntegrationTestList = null;
+        private static Dictionary<string, DomainControllerTestData> dataIntegrationTests = null;
 
         public static Dictionary<string, DomainControllerTestData> TestList
         {
             get
             {
-                if (restIntegrationTestList == null) InitRestIntegrationTests();
-                return restIntegrationTestList;
+                if (dataIntegrationTests == null) InitRestIntegrationTests();
+                return dataIntegrationTests;
             }
         }
 
 
         private static void InitRestIntegrationTests()
         {
-            restIntegrationTestList = new Dictionary<string, DomainControllerTestData>();
+            dataIntegrationTests = new Dictionary<string, DomainControllerTestData>();
 
             // Get Provider by Key
-            restIntegrationTestList.Add("SampleByInt", new DomainControllerTestData()
+            dataIntegrationTests.Add("SampleByInt", new DomainControllerTestData()
             {
-                DataModelName = "SampleData",
+                DataModelName = "SampleDataModel",
                 // TODO: Once we refactor DataModel classes, we can share them with consumers if 
                 //       that is helpful.
 

@@ -15,20 +15,12 @@ namespace RestMagic.Platform.UnitTests
     public class DomainControllerTests
     {
 
-        //[TestMethod]
-        //public void TestBulkDownload()
-        //{
-        //    string testToUse = DataHelper.TestList.Keys.First();
-        //    var testScenario = DataHelper.TestList[testToUse];
-
-        //    Debug.WriteLine("Testing Bulk Download for Scenario " + testToUse + ".");
-        //}
         [TestMethod]
-        public void TestModels(Dictionary<string,DomainControllerTestData> ScenariosToTest = null)
+        public void TestModels()
         {
-            Dictionary<string, DomainControllerTestData> testingScenarios = ScenariosToTest == null ? IntegrationTestHelpers.TestList : ScenariosToTest;
+            Dictionary<string, DomainControllerTestData> testingScenarios = IntegrationTestHelpers.TestList;// : ScenariosToTest;
 
-            var client = new RestClient("http://localhost/RestMagic.RestService/api/v1.0/DataModel");
+            var client = new RestClient("http://localhost:50258/api/v1.0/DataModel");
             try
             {
                 foreach (var testScenario in testingScenarios)
@@ -44,7 +36,8 @@ namespace RestMagic.Platform.UnitTests
                     request.RequestFormat = DataFormat.Json;
                     request.AddJsonBody(testScenario.Value.QueryModel);
 
-             
+                    var queryResult = client.Execute< List<SampleDataModel>>(request);
+                   
                     // var dataObject = Activator.CreateInstance(null, classString).Unwrap();
                     // result = (dataObject as DataModel).GetList(parameters, type);
                     //var objectTypeInstance = Activator.CreateInstance<T>();
@@ -56,5 +49,14 @@ namespace RestMagic.Platform.UnitTests
             }
          
         }
+
+        //[TestMethod]
+        //public void TestBulkDownload()
+        //{
+        //    string testToUse = IntegrationTestHelpers.TestList.Keys.First();
+        //    var testScenario = IntegrationTestHelpers.TestList[testToUse];
+
+        //    Debug.WriteLine("Testing Bulk Download for Scenario " + testToUse + ".");
+        //}
     }
 }

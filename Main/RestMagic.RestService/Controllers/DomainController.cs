@@ -31,17 +31,13 @@ namespace RestMagic.RestService.Controllers
       
         public object FindDataByModel(string PrimaryModelName, [FromBody] QueryModel queryModel)
         {
-
-
             object result = string.Empty;
             try
             {
                 if (queryModel.Parameters == null || queryModel.Parameters.Count == 0)
                 {
                     throw new RestMagicExcpetion("Call to FindDataByModel contained no parameters.");
-
                 }
-
                 result = DataModelService.GetData(PrimaryModelName, queryModel);
                 
             }
