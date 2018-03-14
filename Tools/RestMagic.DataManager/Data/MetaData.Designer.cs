@@ -364,6 +364,8 @@ namespace RestMagic.DataManager.Data {
             
             private global::System.Data.DataColumn columnSourceFieldName;
             
+            private global::System.Data.DataColumn columnIsQueryable;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DataModelDetailsDataTable() {
@@ -431,6 +433,14 @@ namespace RestMagic.DataManager.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IsQueryableColumn {
+                get {
+                    return this.columnIsQueryable;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -466,13 +476,14 @@ namespace RestMagic.DataManager.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataModelDetailsRow AddDataModelDetailsRow(DataModelsRow parentDataModelsRowByFK_DataModelDetails_DataModel, string DataFieldName, string SourceTableName, string SourceFieldName) {
+            public DataModelDetailsRow AddDataModelDetailsRow(DataModelsRow parentDataModelsRowByFK_DataModelDetails_DataModel, string DataFieldName, string SourceTableName, string SourceFieldName, bool IsQueryable) {
                 DataModelDetailsRow rowDataModelDetailsRow = ((DataModelDetailsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         DataFieldName,
                         SourceTableName,
-                        SourceFieldName};
+                        SourceFieldName,
+                        IsQueryable};
                 if ((parentDataModelsRowByFK_DataModelDetails_DataModel != null)) {
                     columnValuesArray[0] = parentDataModelsRowByFK_DataModelDetails_DataModel[0];
                 }
@@ -510,6 +521,7 @@ namespace RestMagic.DataManager.Data {
                 this.columnDataFieldName = base.Columns["DataFieldName"];
                 this.columnSourceTableName = base.Columns["SourceTableName"];
                 this.columnSourceFieldName = base.Columns["SourceFieldName"];
+                this.columnIsQueryable = base.Columns["IsQueryable"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -523,6 +535,8 @@ namespace RestMagic.DataManager.Data {
                 base.Columns.Add(this.columnSourceTableName);
                 this.columnSourceFieldName = new global::System.Data.DataColumn("SourceFieldName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSourceFieldName);
+                this.columnIsQueryable = new global::System.Data.DataColumn("IsQueryable", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIsQueryable);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnDataModelName,
                                 this.columnDataFieldName}, true));
@@ -1285,6 +1299,22 @@ namespace RestMagic.DataManager.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsQueryable {
+                get {
+                    try {
+                        return ((bool)(this[this.tableDataModelDetails.IsQueryableColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IsQueryable\' in table \'DataModelDetails\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataModelDetails.IsQueryableColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DataModelsRow DataModelsRow {
                 get {
                     return ((DataModelsRow)(this.GetParentRow(this.Table.ParentRelations["FK_DataModelDetails_DataModel"])));
@@ -1292,6 +1322,18 @@ namespace RestMagic.DataManager.Data {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_DataModelDetails_DataModel"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIsQueryableNull() {
+                return this.IsNull(this.tableDataModelDetails.IsQueryableColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIsQueryableNull() {
+                this[this.tableDataModelDetails.IsQueryableColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1656,39 +1698,44 @@ namespace RestMagic.DataManager.Data.MetaDataTableAdapters {
             tableMapping.ColumnMappings.Add("DataFieldName", "DataFieldName");
             tableMapping.ColumnMappings.Add("SourceTableName", "SourceTableName");
             tableMapping.ColumnMappings.Add("SourceFieldName", "SourceFieldName");
+            tableMapping.ColumnMappings.Add("IsQueryable", "IsQueryable");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DataModelDetails] WHERE (([DataModelName] = @Original_DataMode" +
-                "lName) AND ([DataFieldName] = @Original_DataFieldName) AND ([SourceTableName] = " +
-                "@Original_SourceTableName) AND ([SourceFieldName] = @Original_SourceFieldName))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[DataModelDetails] WHERE (([DataModelName] = @Original_DataModelName) AND ([DataFieldName] = @Original_DataFieldName) AND ([SourceTableName] = @Original_SourceTableName) AND ([SourceFieldName] = @Original_SourceFieldName) AND ((@IsNull_IsQueryable = 1 AND [IsQueryable] IS NULL) OR ([IsQueryable] = @Original_IsQueryable)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataModelName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataModelName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataFieldName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SourceTableName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceTableName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SourceFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceFieldName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_IsQueryable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsQueryable", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsQueryable", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsQueryable", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DataModelDetails] ([DataModelName], [DataFieldName], [SourceTableName], [SourceFieldName]) VALUES (@DataModelName, @DataFieldName, @SourceTableName, @SourceFieldName);
-SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataModelDetails WHERE (DataFieldName = @DataFieldName) AND (DataModelName = @DataModelName)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DataModelDetails] ([DataModelName], [DataFieldName], [SourceTableName], [SourceFieldName], [IsQueryable]) VALUES (@DataModelName, @DataFieldName, @SourceTableName, @SourceFieldName, @IsQueryable);
+SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName, IsQueryable FROM DataModelDetails WHERE (DataFieldName = @DataFieldName) AND (DataModelName = @DataModelName)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DataModelName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataModelName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DataFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataFieldName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SourceTableName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceTableName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SourceFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceFieldName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsQueryable", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsQueryable", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DataModelDetails] SET [DataModelName] = @DataModelName, [DataFieldName] = @DataFieldName, [SourceTableName] = @SourceTableName, [SourceFieldName] = @SourceFieldName WHERE (([DataModelName] = @Original_DataModelName) AND ([DataFieldName] = @Original_DataFieldName) AND ([SourceTableName] = @Original_SourceTableName) AND ([SourceFieldName] = @Original_SourceFieldName));
-SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataModelDetails WHERE (DataFieldName = @DataFieldName) AND (DataModelName = @DataModelName)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DataModelDetails] SET [DataModelName] = @DataModelName, [DataFieldName] = @DataFieldName, [SourceTableName] = @SourceTableName, [SourceFieldName] = @SourceFieldName, [IsQueryable] = @IsQueryable WHERE (([DataModelName] = @Original_DataModelName) AND ([DataFieldName] = @Original_DataFieldName) AND ([SourceTableName] = @Original_SourceTableName) AND ([SourceFieldName] = @Original_SourceFieldName) AND ((@IsNull_IsQueryable = 1 AND [IsQueryable] IS NULL) OR ([IsQueryable] = @Original_IsQueryable)));
+SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName, IsQueryable FROM DataModelDetails WHERE (DataFieldName = @DataFieldName) AND (DataModelName = @DataModelName)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DataModelName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataModelName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DataFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataFieldName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SourceTableName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceTableName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SourceFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceFieldName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsQueryable", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsQueryable", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataModelName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataModelName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataFieldName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SourceTableName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceTableName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SourceFieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SourceFieldName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_IsQueryable", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsQueryable", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsQueryable", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsQueryable", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1704,8 +1751,8 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM dbo.Da" +
-                "taModelDetails";
+            this._commandCollection[0].CommandText = "SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName, IsQueryabl" +
+                "e  FROM dbo.DataModelDetails";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1766,7 +1813,7 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_DataModelName, string Original_DataFieldName, string Original_SourceTableName, string Original_SourceFieldName) {
+        public virtual int Delete(string Original_DataModelName, string Original_DataFieldName, string Original_SourceTableName, string Original_SourceFieldName, global::System.Nullable<bool> Original_IsQueryable) {
             if ((Original_DataModelName == null)) {
                 throw new global::System.ArgumentNullException("Original_DataModelName");
             }
@@ -1791,6 +1838,14 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_SourceFieldName));
             }
+            if ((Original_IsQueryable.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((bool)(Original_IsQueryable.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1811,7 +1866,7 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string DataModelName, string DataFieldName, string SourceTableName, string SourceFieldName) {
+        public virtual int Insert(string DataModelName, string DataFieldName, string SourceTableName, string SourceFieldName, global::System.Nullable<bool> IsQueryable) {
             if ((DataModelName == null)) {
                 throw new global::System.ArgumentNullException("DataModelName");
             }
@@ -1836,6 +1891,12 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(SourceFieldName));
             }
+            if ((IsQueryable.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((bool)(IsQueryable.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1856,7 +1917,7 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string DataModelName, string DataFieldName, string SourceTableName, string SourceFieldName, string Original_DataModelName, string Original_DataFieldName, string Original_SourceTableName, string Original_SourceFieldName) {
+        public virtual int Update(string DataModelName, string DataFieldName, string SourceTableName, string SourceFieldName, global::System.Nullable<bool> IsQueryable, string Original_DataModelName, string Original_DataFieldName, string Original_SourceTableName, string Original_SourceFieldName, global::System.Nullable<bool> Original_IsQueryable) {
             if ((DataModelName == null)) {
                 throw new global::System.ArgumentNullException("DataModelName");
             }
@@ -1881,29 +1942,43 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(SourceFieldName));
             }
+            if ((IsQueryable.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((bool)(IsQueryable.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             if ((Original_DataModelName == null)) {
                 throw new global::System.ArgumentNullException("Original_DataModelName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_DataModelName));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_DataModelName));
             }
             if ((Original_DataFieldName == null)) {
                 throw new global::System.ArgumentNullException("Original_DataFieldName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_DataFieldName));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_DataFieldName));
             }
             if ((Original_SourceTableName == null)) {
                 throw new global::System.ArgumentNullException("Original_SourceTableName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_SourceTableName));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_SourceTableName));
             }
             if ((Original_SourceFieldName == null)) {
                 throw new global::System.ArgumentNullException("Original_SourceFieldName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_SourceFieldName));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_SourceFieldName));
+            }
+            if ((Original_IsQueryable.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((bool)(Original_IsQueryable.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1925,8 +2000,8 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName FROM DataM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string SourceTableName, string SourceFieldName, string Original_DataModelName, string Original_DataFieldName, string Original_SourceTableName, string Original_SourceFieldName) {
-            return this.Update(Original_DataModelName, Original_DataFieldName, SourceTableName, SourceFieldName, Original_DataModelName, Original_DataFieldName, Original_SourceTableName, Original_SourceFieldName);
+        public virtual int Update(string SourceTableName, string SourceFieldName, global::System.Nullable<bool> IsQueryable, string Original_DataModelName, string Original_DataFieldName, string Original_SourceTableName, string Original_SourceFieldName, global::System.Nullable<bool> Original_IsQueryable) {
+            return this.Update(Original_DataModelName, Original_DataFieldName, SourceTableName, SourceFieldName, IsQueryable, Original_DataModelName, Original_DataFieldName, Original_SourceTableName, Original_SourceFieldName, Original_IsQueryable);
         }
     }
     

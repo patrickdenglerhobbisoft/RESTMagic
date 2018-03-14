@@ -1,0 +1,14 @@
+﻿
+	SELECT	
+			<FieldList />
+			 
+	FROM
+			<TableList />
+	WHERE
+			<WhereClause />
+			
+			--Id =IIF (@Id is null, Id  ,@Id) AND
+			--TextData1 =IIF (@TextData1 is null, TextData1  ,@TextData1) AND
+			--IntData2 =IIF (@IntData2 is null, IntData2  ,@IntData2) AND
+			--CustomEnum =IIF (@CustomEnum is null, CustomEnum  ,@CustomEnum) 
+

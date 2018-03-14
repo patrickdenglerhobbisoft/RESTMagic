@@ -48,10 +48,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -59,9 +61,13 @@
       <Project>{6e2f4bc9-7360-42db-b671-c90dbdc93a7c}</Project>
       <Name>RestMagic.Lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Tools\RestMagic.SDK\RestMagic.SDK.csproj">
-      <Project>{80c1d58b-7132-4d68-b22b-5d2f8b9d2810}</Project>
-      <Name>RestMagic.SDK</Name>
+    <ProjectReference Include="..\..\Main\RestMagic.RestService\RestMagic.RestService.csproj">
+      <Project>{6c65e132-1a9c-4e41-b038-1ed275383a97}</Project>
+      <Name>RestMagic.RestService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\RestMagic.DataManager\RestMagic.DataManager.csproj">
+      <Project>{B4BB20FB-4CAA-45CF-A135-69A39287E226}</Project>
+      <Name>RestMagic.DataManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

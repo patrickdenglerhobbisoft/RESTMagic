@@ -14,7 +14,7 @@ using System.Web;
 namespace RestMagic.Lib.Data
 {
 
-    public class DataFactory : IDisposable
+    public class DataFactory : SchemaFactory, IDataFactory, IDisposable
     {
         /******************************************************************************************************/
 
@@ -30,7 +30,7 @@ namespace RestMagic.Lib.Data
         private int sqlTimeOutInSeconds = 30;
 
         
-        public int SqlTimeOutInSeconds
+        private int SqlTimeOutInSeconds
         {
             get { return sqlTimeOutInSeconds; }
             set
@@ -43,15 +43,6 @@ namespace RestMagic.Lib.Data
 
 
         SqlTransaction transaction;
-        private object returnValue;
-
-
-
-        public object ReturnValue
-        {
-
-            set { returnValue = value; }
-        }
 
         #endregion
 
@@ -61,7 +52,7 @@ namespace RestMagic.Lib.Data
 
 
 
-        public SqlConnection InitializeSQLConnection()
+        private SqlConnection InitializeSQLConnection()
         {
             // forced override of connString
             string connectionString = string.Empty;
@@ -76,18 +67,9 @@ namespace RestMagic.Lib.Data
             connection = InitializeSQLConnection();
         }
 
+        
 
-
-
-        public static object TopRow(DataSet ds, string columnName = "")
-        {
-            if (!ValidateHasRows(ds))
-                return null;
-            if (columnName.Length == 0)
-                return ds.Tables[0].Rows[0];
-            else
-                return ds.Tables[0].Rows[0][columnName];
-        }
+       
 
 
         #endregion
@@ -268,8 +250,8 @@ namespace RestMagic.Lib.Data
                 using (var conn = OpenConnectionAsAppropriate())
                 {
 
-
-                    command.CommandType = sqlQueryString.ToUpper().StartsWith("SP") ? CommandType.StoredProcedure : CommandType.Text;
+                    // TODO: below determination is fragile
+                    command.CommandType = !sqlQueryString.Contains(" ") ? CommandType.StoredProcedure : CommandType.Text;
                     command.CommandText = sqlQueryString;
                     command.Parameters.Clear();
 
@@ -583,30 +565,7 @@ namespace RestMagic.Lib.Data
 
 
 
-        public static bool ValidateHasRows(DataSet ds, int TableCount = 1)
-        {
-            if (ds == null)
-                return false;
-
-            if (ds.Tables.Count < TableCount)
-                return false;
-
-            int tableCounter = 0;
-            bool hasDataInEachTable = true;
-            foreach (DataTable table in ds.Tables)
-            {
-                if (table.Rows.Count == 0)
-                {
-                    hasDataInEachTable = false;
-                    break;
-                }
-                tableCounter++;
-                if (tableCounter >= TableCount)
-                    break;
-            }
-
-            return hasDataInEachTable;
-        }
+     
 
         public static void ExecuteNonquery(string v, List<SqlParameter> list)
         {
