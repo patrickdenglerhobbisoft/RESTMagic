@@ -2,14 +2,15 @@
 <xs:schema id="MetaData" targetNamespace="http://tempuri.org/MetaData.xsd" xmlns:mstns="http://tempuri.org/MetaData.xsd" xmlns="http://tempuri.org/MetaData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="SampleConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="SampleConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.RestMagic.DataManager.Properties.Settings.GlobalReference.Default.SampleConnectionString1" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="SampleConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="SampleConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.RestMagic.DataManager.Properties.Settings.GlobalReference.Default.SampleConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Connections	TableAdapter" GeneratorDataComponentClassName="Connections_TableAdapter" Name="Connections	" UserDataComponentName="Connections	TableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="SampleConnectionString1 (Settings)" DbObjectName="dbo.[Connections	]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="SampleConnectionString (Settings)" DbObjectName="dbo.[Connections	]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Connections	] WHERE (([Id] = @Original_Id) AND ([ConnectionName] = @Original_ConnectionName))</CommandText>
@@ -60,7 +61,7 @@ SELECT Id, ConnectionName, ConnectionString FROM [Connections	] WHERE (Id = @Id)
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="JoinsTableAdapter" GeneratorDataComponentClassName="JoinsTableAdapter" Name="Joins" UserDataComponentName="JoinsTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="SampleConnectionString1 (Settings)" DbObjectName="dbo.Joins" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="SampleConnectionString (Settings)" DbObjectName="dbo.Joins" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Joins] WHERE (([LegacyTableParent] = @Original_LegacyTableParent) AND ([LegacyTableRelated] = @Original_LegacyTableRelated) AND ((@IsNull_JoinStatement = 1 AND [JoinStatement] IS NULL) OR ([JoinStatement] = @Original_JoinStatement)))</CommandText>
@@ -113,55 +114,9 @@ SELECT LegacyTableParent, LegacyTableRelated, JoinStatement FROM Joins WHERE (Le
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataModelsTableAdapter" GeneratorDataComponentClassName="DataModelsTableAdapter" Name="DataModels" UserDataComponentName="DataModelsTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="SampleConnectionString1 (Settings)" DbObjectName="dbo.DataModels" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <DeleteCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [dbo].[DataModels] WHERE (([DataModelName] = @Original_DataModelName))</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </DeleteCommand>
-                <InsertCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[DataModels] ([DataModelName], [Comments]) VALUES (@DataModelName, @Comments);
-SELECT DataModelName, Comments FROM DataModels WHERE (DataModelName = @DataModelName)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Comments" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Comments" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </InsertCommand>
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT DataModelName, Comments FROM dbo.DataModels</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-                <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[DataModels] SET [DataModelName] = @DataModelName, [Comments] = @Comments WHERE (([DataModelName] = @Original_DataModelName));
-SELECT DataModelName, Comments FROM DataModels WHERE (DataModelName = @DataModelName)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Comments" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Comments" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </UpdateCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="DataModelName" DataSetColumn="DataModelName" />
-              <Mapping SourceColumn="Comments" DataSetColumn="Comments" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataModelDetailsTableAdapter" GeneratorDataComponentClassName="DataModelDetailsTableAdapter" Name="DataModelDetails" UserDataComponentName="DataModelDetailsTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="SampleConnectionString1 (Settings)" DbObjectName="dbo.DataModelDetails" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="SampleConnectionString (Settings)" DbObjectName="dbo.DataModelDetails" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[DataModelDetails] WHERE (([DataModelName] = @Original_DataModelName) AND ([DataFieldName] = @Original_DataFieldName) AND ([SourceTableName] = @Original_SourceTableName) AND ([SourceFieldName] = @Original_SourceFieldName) AND ((@IsNull_IsQueryable = 1 AND [IsQueryable] IS NULL) OR ([IsQueryable] = @Original_IsQueryable)))</CommandText>
@@ -224,6 +179,52 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName, IsQueryab
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataModelsTableAdapter" GeneratorDataComponentClassName="DataModelsTableAdapter" Name="DataModels" UserDataComponentName="DataModelsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="SampleConnectionString (Settings)" DbObjectName="dbo.DataModels" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [dbo].[DataModels] WHERE (([DataModelName] = @Original_DataModelName))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[DataModels] ([DataModelName], [Comments]) VALUES (@DataModelName, @Comments);
+SELECT DataModelName, Comments FROM DataModels WHERE (DataModelName = @DataModelName)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Comments" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Comments" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT DataModelName, Comments FROM dbo.DataModels</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [dbo].[DataModels] SET [DataModelName] = @DataModelName, [Comments] = @Comments WHERE (([DataModelName] = @Original_DataModelName));
+SELECT DataModelName, Comments FROM DataModels WHERE (DataModelName = @DataModelName)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Comments" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Comments" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_DataModelName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DataModelName" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DataModelName" DataSetColumn="DataModelName" />
+              <Mapping SourceColumn="Comments" DataSetColumn="Comments" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -280,26 +281,6 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName, IsQueryab
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DataModels" msprop:Generator_TableClassName="DataModelsDataTable" msprop:Generator_TableVarName="tableDataModels" msprop:Generator_TablePropName="DataModels" msprop:Generator_RowDeletingName="DataModelsRowDeleting" msprop:Generator_RowChangingName="DataModelsRowChanging" msprop:Generator_RowEvHandlerName="DataModelsRowChangeEventHandler" msprop:Generator_RowDeletedName="DataModelsRowDeleted" msprop:Generator_UserTableName="DataModels" msprop:Generator_RowChangedName="DataModelsRowChanged" msprop:Generator_RowEvArgName="DataModelsRowChangeEvent" msprop:Generator_RowClassName="DataModelsRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="DataModelName" msprop:Generator_ColumnVarNameInTable="columnDataModelName" msprop:Generator_ColumnPropNameInRow="DataModelName" msprop:Generator_ColumnPropNameInTable="DataModelNameColumn" msprop:Generator_UserColumnName="DataModelName">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" msprop:Generator_UserColumnName="Comments" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="DataModelDetails" msprop:Generator_TableClassName="DataModelDetailsDataTable" msprop:Generator_TableVarName="tableDataModelDetails" msprop:Generator_TablePropName="DataModelDetails" msprop:Generator_RowDeletingName="DataModelDetailsRowDeleting" msprop:Generator_RowChangingName="DataModelDetailsRowChanging" msprop:Generator_RowEvHandlerName="DataModelDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="DataModelDetailsRowDeleted" msprop:Generator_UserTableName="DataModelDetails" msprop:Generator_RowChangedName="DataModelDetailsRowChanged" msprop:Generator_RowEvArgName="DataModelDetailsRowChangeEvent" msprop:Generator_RowClassName="DataModelDetailsRow">
           <xs:complexType>
             <xs:sequence>
@@ -335,6 +316,26 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName, IsQueryab
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="DataModels" msprop:Generator_TableClassName="DataModelsDataTable" msprop:Generator_TableVarName="tableDataModels" msprop:Generator_TablePropName="DataModels" msprop:Generator_RowDeletingName="DataModelsRowDeleting" msprop:Generator_RowChangingName="DataModelsRowChanging" msprop:Generator_RowEvHandlerName="DataModelsRowChangeEventHandler" msprop:Generator_RowDeletedName="DataModelsRowDeleted" msprop:Generator_UserTableName="DataModels" msprop:Generator_RowChangedName="DataModelsRowChanged" msprop:Generator_RowEvArgName="DataModelsRowChangeEvent" msprop:Generator_RowClassName="DataModelsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DataModelName" msprop:Generator_ColumnVarNameInTable="columnDataModelName" msprop:Generator_ColumnPropNameInRow="DataModelName" msprop:Generator_ColumnPropNameInTable="DataModelNameColumn" msprop:Generator_UserColumnName="DataModelName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" msprop:Generator_UserColumnName="Comments" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -346,19 +347,19 @@ SELECT DataModelName, DataFieldName, SourceTableName, SourceFieldName, IsQueryab
       <xs:field xpath="mstns:LegacyTableParent" />
       <xs:field xpath="mstns:LegacyTableRelated" />
     </xs:unique>
-    <xs:unique name="DataModels_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:DataModels" />
-      <xs:field xpath="mstns:DataModelName" />
-    </xs:unique>
     <xs:unique name="DataModelDetails_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:DataModelDetails" />
       <xs:field xpath="mstns:DataModelName" />
       <xs:field xpath="mstns:DataFieldName" />
     </xs:unique>
+    <xs:unique name="DataModels_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataModels" />
+      <xs:field xpath="mstns:DataModelName" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_DataModelDetails_DataModel" msdata:parent="DataModels" msdata:child="DataModelDetails" msdata:parentkey="DataModelName" msdata:childkey="DataModelName" msprop:Generator_UserChildTable="DataModelDetails" msprop:Generator_ChildPropName="GetDataModelDetailsRows" msprop:Generator_UserRelationName="FK_DataModelDetails_DataModel" msprop:Generator_ParentPropName="DataModelsRow" msprop:Generator_RelationVarName="relationFK_DataModelDetails_DataModel" msprop:Generator_UserParentTable="DataModels" />
+      <msdata:Relationship name="FK_DataModelDetails_DataModel" msdata:parent="DataModels" msdata:child="DataModelDetails" msdata:parentkey="DataModelName" msdata:childkey="DataModelName" msprop:Generator_UserChildTable="DataModelDetails" msprop:Generator_ChildPropName="GetDataModelDetailsRows" msprop:Generator_UserRelationName="FK_DataModelDetails_DataModel" msprop:Generator_RelationVarName="relationFK_DataModelDetails_DataModel" msprop:Generator_UserParentTable="DataModels" msprop:Generator_ParentPropName="DataModelsRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

@@ -60,6 +60,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MetaData.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Helpers.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

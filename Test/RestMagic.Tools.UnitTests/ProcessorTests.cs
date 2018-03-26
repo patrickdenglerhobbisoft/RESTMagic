@@ -23,11 +23,13 @@ namespace RestMagic.Tools.UnitTests
             var dataModelTableAdapter = new DataManager.Data.MetaDataTableAdapters.DataModelsTableAdapter();
             dataModelTableAdapter.Fill(metaData.DataModels);
         }
+
+
         [TestMethod]
         public void ProcessModel()
         {
             Processor processor = new Processor();
-            processor.Generate(new string[] { "MyNewObject" },metaData);
+            processor.Generate(new string[] { "MyNewObject" }, metaData);
 
         }
     }

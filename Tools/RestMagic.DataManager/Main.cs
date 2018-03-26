@@ -10,13 +10,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestMagic.DataManager;
 using RestMagic.Lib.Language;
+using System.Data.SqlClient;
+using RestMagic.DataManager.Data.MetaDataTableAdapters;
 
 namespace RestMagic.DataManager
 {
     public partial class Main : Form
     {
-        Data.MetaDataTableAdapters.DataModelDetailsTableAdapter dataModelDetailsTableAdapter;
-        Data.MetaDataTableAdapters.DataModelsTableAdapter dataModelTableAdapter;
+         DataModelDetailsTableAdapter dataModelDetailsTableAdapter;
+         DataModelsTableAdapter dataModelTableAdapter;
+        string connectionString = string.Empty;
         public Main()
         {
             InitializeComponent();
@@ -26,10 +29,14 @@ namespace RestMagic.DataManager
 
         private void LoadAllData()
         {
-            dataModelDetailsTableAdapter = new Data.MetaDataTableAdapters.DataModelDetailsTableAdapter();
+            connectionString = Helpers.InitConnectionString();
+
+            dataModelDetailsTableAdapter = new  DataModelDetailsTableAdapter();
+            dataModelDetailsTableAdapter.Connection = new  SqlConnection(connectionString);
             dataModelDetailsTableAdapter.Fill(metaData.DataModelDetails);
 
-            dataModelTableAdapter = new Data.MetaDataTableAdapters.DataModelsTableAdapter();
+            dataModelTableAdapter = new  DataModelsTableAdapter();
+            dataModelTableAdapter.Connection = new SqlConnection(connectionString);
             dataModelTableAdapter.Fill(metaData.DataModels);
 
             foreach (MetaData.DataModelsRow row in metaData.DataModels.Rows)

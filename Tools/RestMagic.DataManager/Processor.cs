@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -48,9 +49,35 @@ namespace RestMagic.DataManager
 
         private void CreateFiles(CodeMetaData codeMetaData)
         {
-           
+            string dataModelText = LoadTemplate("datamodel.txt");
+            string dataModelBaseText = LoadTemplate("datamodelbase.txt");
+            string sql = LoadTemplate("sql.txt");
+            string sprocWrapper = LoadTemplate("sprocwrapper.txt");
+
+            dataModelText = ReplaceTokens(dataModelText);
+            dataModelBaseText = ReplaceTokens(dataModelBaseText);
+            sql = ReplaceTokens(sql);
+            sprocWrapper = ReplaceTokens(sprocWrapper);
         }
 
+        private string ReplaceTokens(string dataModelText)
+        {
+            throw new NotImplementedException();
+        }
+
+        //    public string ModelName { get; set; }
+        //public List<string> Parameters { get; set; } = new List<string>();
+        //public List<string> Sql { get; set; } = new List<string>();
+        //public List<string> Properties { get; set; } = new List<string>();
+        //public List<string> WhereClause { get; set; } = new List<string>();
+        //public List<string> TableList { get; set; } = new List<string>();
+
+        private string LoadTemplate(string templateName)
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + @"\Templates\";
+            return File.ReadAllText(path + templateName);
+
+        }
         private List<string> GenerateCodeByType(string codeType, IEnumerable<MetaData.DataModelDetailsRow> modelDetails)
         {
             List<string> result = new List<string>();
@@ -59,9 +86,9 @@ namespace RestMagic.DataManager
                 case "Sql":
                     foreach (MetaData.DataModelDetailsRow row in modelDetails)
                     {
-                        result.Add(row.SourceTableName.ToString() + "." + row.SourceFieldName.ToString() + " AS [" + row.DataFieldName  +"],");
+                        result.Add(row.SourceTableName.ToString() + "." + row.SourceFieldName.ToString() + " AS [" + row.DataFieldName + "],");
                     }
-                        break;
+                    break;
                 case "TableList":
                     foreach (MetaData.DataModelDetailsRow row in modelDetails)
                     {
