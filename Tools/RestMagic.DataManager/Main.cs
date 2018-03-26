@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestMagic.DataManager;
+using RestMagic.Lib.Language;
+
 namespace RestMagic.DataManager
 {
     public partial class Main : Form
@@ -33,7 +35,7 @@ namespace RestMagic.DataManager
             foreach (MetaData.DataModelsRow row in metaData.DataModels.Rows)
             {
                 chkModelGenerate.Items.Add(row.DataModelName.ToString(),true);
-                
+                listModelTest.Items.Add(row.DataModelName.ToString());
             }
         }
 
@@ -49,6 +51,19 @@ namespace RestMagic.DataManager
 
         }
 
-      
+        private void listModelTest_SelectedValueChanged(object sender, EventArgs e)
+        {
+           
+            string typeSelected = listModelTest.SelectedItem.ToString();
+            var objectToTarget = ReflectionHelper.GetObjectTypeInstance(typeSelected,ReflectionHelper.SDK_ASSEMBLY_NAMESPACE);
+            if (objectToTarget != null)
+            {
+                propertyGridModel.SelectedObject = objectToTarget;
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find type selected in assembly " + ReflectionHelper.SDK_ASSEMBLY_NAMESPACE);
+            }
+        }
     }
 }

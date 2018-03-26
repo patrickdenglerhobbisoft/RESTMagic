@@ -55,7 +55,17 @@ namespace RestMagic.Lib.Language
 
             return (DataModel)Activator.CreateInstance(RESTSERVICE_ASSEMBLY_NAMESPACE, dataModelTypeName).Unwrap();
         }
+        public static DataModel GetObjectTypeInstance(string typeName)
+        {
+        
 
+            return GetObjectTypeInstance(typeName, RESTSERVICE_ASSEMBLY_NAMESPACE);
+        }
+        public static DataModel GetObjectTypeInstance(string typeName, string assemblyNameSpace)
+        {
+            string dataModelTypeName = RESTSERVICE_MODEL_NAMESPACE + "." + typeName;
 
+            return (DataModel)Activator.CreateInstance(assemblyNameSpace, dataModelTypeName).Unwrap();
+        }
     }
 }

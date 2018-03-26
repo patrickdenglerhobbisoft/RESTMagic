@@ -34,5 +34,17 @@ namespace RestMagic.DataManager.Properties {
                 return ((string)(this["SampleConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Patrick\\Source\\Repos" +
+            "\\RESTMagic\\Main\\RestMagic.RestService\\App_Data\\Sample.mdf;Integrated Security=Tr" +
+            "ue")]
+        public string SampleConnectionString1 {
+            get {
+                return ((string)(this["SampleConnectionString1"]));
+            }
+        }
     }
 }

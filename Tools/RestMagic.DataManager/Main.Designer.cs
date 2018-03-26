@@ -191,15 +191,16 @@
             // listModelTest
             // 
             this.listModelTest.FormattingEnabled = true;
-            this.listModelTest.Location = new System.Drawing.Point(65, 29);
+            this.listModelTest.Location = new System.Drawing.Point(20, 20);
             this.listModelTest.Name = "listModelTest";
             this.listModelTest.Size = new System.Drawing.Size(121, 24);
             this.listModelTest.TabIndex = 1;
+            this.listModelTest.SelectedValueChanged += new System.EventHandler(this.listModelTest_SelectedValueChanged);
             // 
             // propertyGridModel
             // 
             this.propertyGridModel.HelpVisible = false;
-            this.propertyGridModel.Location = new System.Drawing.Point(394, 194);
+            this.propertyGridModel.Location = new System.Drawing.Point(20, 67);
             this.propertyGridModel.Name = "propertyGridModel";
             this.propertyGridModel.Size = new System.Drawing.Size(338, 328);
             this.propertyGridModel.TabIndex = 0;
