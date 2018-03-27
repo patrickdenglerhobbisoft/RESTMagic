@@ -29,14 +29,13 @@ namespace RestMagic.DataManager
 
         private void LoadAllData()
         {
-            connectionString = Helpers.InitConnectionString();
+            SqlConnection sqlConnection = new SqlConnection(Helpers.InitConnectionString());
 
             dataModelDetailsTableAdapter = new  DataModelDetailsTableAdapter();
-            dataModelDetailsTableAdapter.Connection = new  SqlConnection(connectionString);
-            dataModelDetailsTableAdapter.Fill(metaData.DataModelDetails);
+                 dataModelDetailsTableAdapter.Fill(metaData.DataModelDetails);
 
             dataModelTableAdapter = new  DataModelsTableAdapter();
-            dataModelTableAdapter.Connection = new SqlConnection(connectionString);
+     
             dataModelTableAdapter.Fill(metaData.DataModels);
 
             foreach (MetaData.DataModelsRow row in metaData.DataModels.Rows)
@@ -44,6 +43,7 @@ namespace RestMagic.DataManager
                 chkModelGenerate.Items.Add(row.DataModelName.ToString(),true);
                 listModelTest.Items.Add(row.DataModelName.ToString());
             }
+            sqlConnection.Close();
         }
 
         private void btnProcess_Click(object sender, EventArgs e)
@@ -70,6 +70,23 @@ namespace RestMagic.DataManager
             else
             {
                 MessageBox.Show("Couldn't find type selected in assembly " + ReflectionHelper.SDK_ASSEMBLY_NAMESPACE);
+            }
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("Couldn't find type selected in assembly " + ReflectionHelper.SDK_ASSEMBLY_NAMESPACE);
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 0)
+            {
+
+            }
+            else
+            {
+
             }
         }
     }
