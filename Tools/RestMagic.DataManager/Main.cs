@@ -29,14 +29,17 @@ namespace RestMagic.DataManager
 
         private void LoadAllData()
         {
+            var sql = Helpers.InitConnectionString();
             SqlConnection sqlConnection = new SqlConnection(Helpers.InitConnectionString());
 
             dataModelDetailsTableAdapter = new  DataModelDetailsTableAdapter();
+            dataModelDetailsTableAdapter.Connection = sqlConnection;
                  dataModelDetailsTableAdapter.Fill(metaData.DataModelDetails);
 
             dataModelTableAdapter = new  DataModelsTableAdapter();
-     
+            dataModelTableAdapter.Connection = sqlConnection;
             dataModelTableAdapter.Fill(metaData.DataModels);
+            sqlConnection.Close();
 
             foreach (MetaData.DataModelsRow row in metaData.DataModels.Rows)
             {
@@ -54,7 +57,7 @@ namespace RestMagic.DataManager
                 modelsToProcess.Add(item.ToString());
             }
             Processor processor = new Processor();
-            processor.Generate(modelsToProcess.ToArray(), metaData);
+            processor.Generate(modelsToProcess.ToArray(), metaData,txtResults);
 
         }
 

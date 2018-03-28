@@ -1,4 +1,4 @@
-﻿
+
 #if !SDK
 using RestMagic.Lib.Data;
 #endif
@@ -18,11 +18,10 @@ namespace RestMagic.RestService.Models
     {
     
       
-         
-        public static List<MyNewObjectDetails> GetList(QueryModel queryModel)
+        public static List<MyNewObjectDetails> Get(QueryModel queryModel)
         {
-            MyNewObjectDetails sampleDataModel = new MyNewObjectDetails();
-            return sampleDataModel.Get<MyNewObjectDetails>(queryModel);
+             
+            return new  MyNewObjectDetails().Get<MyNewObjectDetails>(queryModel);
         }
 
      

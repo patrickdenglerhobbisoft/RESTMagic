@@ -18,10 +18,10 @@ namespace RestMagic.RestService.Models
     {
     
       
-        public static <DataModelName /> Get(QueryModel queryModel)
+        public static List<<DataModelName />> Get(QueryModel queryModel)
         {
              
-            return new <DataModelName />().Get<<DataModelName />>(queryModel);
+            return new  <DataModelName />().Get<<DataModelName />>(queryModel);
         }
 
      

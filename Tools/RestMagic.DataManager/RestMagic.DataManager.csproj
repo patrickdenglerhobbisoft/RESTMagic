@@ -97,6 +97,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -120,10 +121,18 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Logo.png" />
-    <Content Include="Templates\datamodel.txt" />
-    <Content Include="Templates\datamodelbase.txt" />
-    <Content Include="Templates\sprocwrapper.txt" />
-    <Content Include="Templates\sql.txt" />
+    <None Include="Templates\datamodel.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\datamodelbase.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\sprocwrapper.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\sql.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

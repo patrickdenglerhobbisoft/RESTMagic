@@ -1,4 +1,4 @@
-﻿
+
 #if !SDK
 using RestMagic.Lib.Data;
 #endif
@@ -12,32 +12,39 @@ using System.Threading.Tasks;
 namespace RestMagic.RestService.Models
 {
 
-  
+   
     public partial class MyNewObjectDetails
 #if !SDK
-        : DataModel
+        : DataModel 
 #endif
     {
          
-        public long Id { get; set; }
+        		public int ChildName{ get; set;}
+		public int LastUpdated{ get; set;}
 
-        public string TextData1 { get; set; }
+#if !SDK
+		public override string GetSqlText()
+        {
+            return @"
+	SELECT	
+			<FieldList />
+			 
+	FROM
+					LegacyTableDetails,
 
-        public int IntData2 { get; set; }
+	WHERE
+					[LegacyTableDetails].[C0NN1] = IIF(@ChildName is null, [LegacyTableDetails].[C0NN1], @ChildName) AND
+		[LegacyTableDetails].[BadSchemaNameDate] = IIF(@LastUpdated is null, [LegacyTableDetails].[BadSchemaNameDate], @LastUpdated) AND
 
-        public MyCustomEnum CustomEnum { get; set; }
+			
+			--Id =IIF (@Id is null, Id  ,@Id) AND
+			--TextData1 =IIF (@TextData1 is null, TextData1  ,@TextData1) AND
+			--IntData2 =IIF (@IntData2 is null, IntData2  ,@IntData2) AND
+			--CustomEnum =IIF (@CustomEnum is null, CustomEnum  ,@CustomEnum) 
 
-        [ExcludeAsSqlParam]
-        public DateTime LastUpdateDate { get; set; }
-
-        [ExcludeAsSqlParam]
-        public bool IsAuthenticated { get; set; } = false;  // example of field not stored in database
-
-      
-
-
-
-
+";
+        }
+#endif   
 
     }
 }

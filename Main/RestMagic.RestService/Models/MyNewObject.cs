@@ -1,4 +1,4 @@
-﻿
+
 #if !SDK
 using RestMagic.Lib.Data;
 #endif
@@ -13,15 +13,15 @@ namespace RestMagic.RestService.Models
     
     public partial class MyNewObject
 #if !SDK
-        : DataModelComposite
+        : DataModel
 #endif
     {
     
       
-        public static MyNewObject Get(QueryModel[] queryModel)
+        public static List<MyNewObject> Get(QueryModel queryModel)
         {
-            MyNewObject sampleDataModel = new MyNewObject();
-            return sampleDataModel.GetComposite<MyNewObject>(queryModel);
+             
+            return new  MyNewObject().Get<MyNewObject>(queryModel);
         }
 
      

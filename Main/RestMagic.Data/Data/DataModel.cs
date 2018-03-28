@@ -10,6 +10,7 @@ namespace RestMagic.Lib.Data
 
     public class DataModel
     {
+        
         private string parameterizedQuery;
         public string ParameterizedQuery
         {
@@ -26,6 +27,11 @@ namespace RestMagic.Lib.Data
         }
 
         private string DBAccessText = null;
+
+        public virtual string GetSqlText()
+        {
+            return string.Empty;
+        }
 
         public virtual List<T> Get<T>(QueryModel queryModel)
         {

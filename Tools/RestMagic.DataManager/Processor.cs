@@ -10,22 +10,23 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RestMagic.DataManager
 {
     public class Processor
     {
-        public void Generate(string[] dataModels, MetaData metaData)
+        public void Generate(string[] dataModels, MetaData metaData,TextBox textBox = null)
         {
-            InitializeSql();
+
             var metaDataDetails = metaData.DataModelDetails.ToList();
             foreach (var dataModel in dataModels)
             {
-                GenerateCodeForModel(dataModel, metaDataDetails.Where(m => m.DataModelName == dataModel));
+                GenerateCodeForModel(dataModel, metaDataDetails.Where(m => m.DataModelName == dataModel), textBox);
             }
         }
 
-        private void GenerateCodeForModel(string dataModel, IEnumerable<MetaData.DataModelDetailsRow> modelDetails)
+        private void GenerateCodeForModel(string dataModel, IEnumerable<MetaData.DataModelDetailsRow> modelDetails, TextBox textBox = null)
         {
             {
 
@@ -41,40 +42,59 @@ namespace RestMagic.DataManager
 
                 };
                 // replace templates
-                CreateFiles(codeMetaData);
+                CreateFiles(codeMetaData, textBox);
 
             }
 
         }
 
-        private void CreateFiles(CodeMetaData codeMetaData)
+        private void CreateFiles(CodeMetaData codeMetaData, TextBox textBox = null)
         {
+            string modelName = codeMetaData.ModelName;
             string dataModelText = LoadTemplate("datamodel.txt");
             string dataModelBaseText = LoadTemplate("datamodelbase.txt");
             string sql = LoadTemplate("sql.txt");
             string sprocWrapper = LoadTemplate("sprocwrapper.txt");
 
-            dataModelText = ReplaceTokens(dataModelText);
-            dataModelBaseText = ReplaceTokens(dataModelBaseText);
-            sql = ReplaceTokens(sql);
-            sprocWrapper = ReplaceTokens(sprocWrapper);
+            sql = ReplaceTokens(codeMetaData, sql);
+            codeMetaData.AllSql = sql;
+            dataModelText = ReplaceTokens(codeMetaData, dataModelText);
+            dataModelBaseText = ReplaceTokens(codeMetaData, dataModelBaseText);
+          
+            sprocWrapper = ReplaceTokens(codeMetaData, sprocWrapper);
+
+            string serviceDirectory = Helpers.GetRestServiceDirectory();
+
+            GenerateFiles(dataModelText, modelName + ".cs", serviceDirectory + @"Models\", textBox);
+            GenerateFiles(dataModelBaseText, modelName + ".cs", serviceDirectory + @"Models\Base\", textBox);
+            GenerateFiles(sprocWrapper, modelName + ".sql", serviceDirectory + @"Sql\", textBox);
+ 
         }
 
-        private string ReplaceTokens(string dataModelText)
+        private void GenerateFiles(string dataModelText, string fileName, string location, TextBox textBox =null)
         {
-            throw new NotImplementedException();
+            File.WriteAllText(location + fileName, dataModelText);
+            if (textBox != null)
+            {
+                textBox.Text += "File " + location + fileName + " written." + Environment.NewLine; 
+            }
         }
 
-        //    public string ModelName { get; set; }
-        //public List<string> Parameters { get; set; } = new List<string>();
-        //public List<string> Sql { get; set; } = new List<string>();
-        //public List<string> Properties { get; set; } = new List<string>();
-        //public List<string> WhereClause { get; set; } = new List<string>();
-        //public List<string> TableList { get; set; } = new List<string>();
+        private string ReplaceTokens(CodeMetaData codeMetaData, string dataModelText)
+        {
+            var result = dataModelText.Replace("<DataModelName />", codeMetaData.ModelName)
+                    .Replace("<Parameters />", codeMetaData.FormatListToString(codeMetaData.Parameters, ""))
+                    .Replace("<Sql />", codeMetaData.AllSql)
+                    .Replace("<Properties />", codeMetaData.FormatListToString(codeMetaData.Properties, ""))
+                    .Replace("<WhereClause />", codeMetaData.FormatListToString(codeMetaData.WhereClause, ""))
+                    .Replace("<TableList />", codeMetaData.FormatListToString(codeMetaData.TableList, ""));
+            return result;
+        }
 
+     
         private string LoadTemplate(string templateName)
         {
-            var path = AppDomain.CurrentDomain.BaseDirectory + @"\Templates\";
+            var path = AppDomain.CurrentDomain.BaseDirectory + @"Templates\";
             return File.ReadAllText(path + templateName);
 
         }
@@ -115,28 +135,19 @@ namespace RestMagic.DataManager
                 DataSet ds = DataFactory.GetDataSetStatic(codeType, parameters);
                 if (DataFactory.ValidateHasRows(ds))
                 {
-                    result.Add(ds.Tables[0].Rows[0].ToString());
+                    result.Add(ds.Tables[0].Rows[0][0].ToString());
                 }
             }
             return result;
         }
-        private void InitializeSql()
-        {
-            string assemblyLocation = Assembly.GetExecutingAssembly().Location;
-            // C:\Users\patri\source\repos\RestMagic\Test\RestMagic.UnitTests\bin\Debug\RestMagic.UnitTests.dll
-            // C:\Users\patri\source\repos\RestMagic\Test\RestMagic.Tools.UnitTests\bin\Debug\RestMagic.DataManager.exe
-            string restMagicServiceDirectory = assemblyLocation.Replace(@"Test\RestMagic.UnitTests\bin\Debug\RestMagic.UnitTests.dll", @"Main\RestMagic.RestService");
-            restMagicServiceDirectory = restMagicServiceDirectory.Replace(@"Test\RestMagic.Tools.UnitTests\bin\Debug\RestMagic.DataManager.exe", @"Main\RestMagic.RestService");
-            var databaseDirectory = restMagicServiceDirectory + @"\App_Data";
 
-            AppDomain.CurrentDomain.SetData("DataDirectory", databaseDirectory);
-            DataFactory.PrimaryConnectionString = ConfigurationManager.ConnectionStrings["Sample"].ConnectionString;
-        }
     }
 
 
     class CodeMetaData
     {
+        internal string AllSql;
+
         public string ModelName { get; set; }
         public List<string> Parameters { get; set; } = new List<string>();
         public List<string> Sql { get; set; } = new List<string>();
